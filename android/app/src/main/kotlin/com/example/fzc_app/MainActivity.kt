@@ -1,4 +1,4 @@
-package com.example.fzc_app
+package com.example.autp_parts_app
 
 import io.flutter.embedding.android.FlutterActivity
 

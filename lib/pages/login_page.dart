@@ -1,3 +1,6 @@
+import 'package:auto_parts_app/screens/splash_screen.dart';
+import 'package:auto_parts_app/utils/constants.dart';
+import 'package:auto_parts_app/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,8 +15,21 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   void onSubmit() {
-    if (emailController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty) {}
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      if (emailController.text == "admin" &&
+          passwordController.text == "flutter") {
+        SecureStorage secureStorage = SecureStorage();
+        secureStorage.writeSecureData("auth_token", "secureToken");
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const CustomSplashScreen()));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Invalid credentials')),
+        );
+      }
+    }
   }
 
   @override
@@ -25,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("FZC Login",
+              const Text("Login",
                   style: TextStyle(
                     fontSize: 28,
                   )),
@@ -36,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 controller: emailController,
                 decoration: const InputDecoration(
                     hintText: "Email",
-                    focusColor: Colors.pink,
+                    focusColor: Constants.primaryColor,
                     prefixIcon: Icon(Icons.verified_user)),
               ),
               const SizedBox(
@@ -46,7 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                 controller: passwordController,
                 decoration: const InputDecoration(
                     hintText: "Password",
-                    focusColor: Colors.pink,
+                    focusColor: Constants.primaryColor,
+                    fillColor: Colors.white,
                     prefixIcon: Icon(Icons.verified_user)),
               ),
               const SizedBox(
@@ -61,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                     label: const Text("Login"),
                     icon: const Icon(Icons.check),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink,
+                        backgroundColor: Constants.primaryColor,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 20),

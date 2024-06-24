@@ -1,6 +1,8 @@
+import 'package:auto_parts_app/pages/login_page.dart';
+import 'package:auto_parts_app/pages/tabs/tabs_navigation.dart';
+import 'package:auto_parts_app/utils/constants.dart';
+import 'package:auto_parts_app/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:fzc_app/pages/tabs/tabs_navigation.dart';
-import 'package:fzc_app/utils/constants.dart';
 
 class CustomSplashScreen extends StatefulWidget {
   const CustomSplashScreen({super.key});
@@ -27,7 +29,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
       curve: Curves.easeIn,
     );
 
-    _navigateToHome();
+    _checkTokenAndNavigate();
   }
 
   @override
@@ -36,12 +38,25 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
     super.dispose();
   }
 
-  void _navigateToHome() async {
+  void _checkTokenAndNavigate() async {
     await Future.delayed(const Duration(seconds: 3));
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const TabsNavigation()),
-    );
+    SecureStorage secureStorage =
+        SecureStorage(); // Simulate a delay for splash screen
+    String? token = await secureStorage.readSecureData('auth_token');
+
+    if (token != null && token.isNotEmpty) {
+      // Token is present, navigate to home screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const TabsNavigation()),
+      );
+    } else {
+      // Token is not present, navigate to login screen
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+      );
+    }
   }
 
   @override
@@ -51,7 +66,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
         child: FadeTransition(
           opacity: _animation,
           child: const Text(
-            'FZC Global Parts',
+            'Global Parts',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,

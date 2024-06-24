@@ -1,5 +1,5 @@
+import 'package:auto_parts_app/components/bottom_navigaton_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:fzc_app/components/bottom_navigaton_bar.dart';
 
 class TabsNavigation extends StatefulWidget {
   const TabsNavigation({super.key});
@@ -11,8 +11,11 @@ class TabsNavigation extends StatefulWidget {
 class _TabsNavigationState extends State<TabsNavigation> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      bottomNavigationBar: CustomBottomNavigationBar(),
+    return const SafeArea(
+      top: true,
+      child: Scaffold(
+        bottomNavigationBar: CustomBottomNavigationBar(),
+      ),
     );
   }
 }

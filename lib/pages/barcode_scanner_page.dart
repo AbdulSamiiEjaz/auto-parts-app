@@ -1,7 +1,7 @@
+import 'package:auto_parts_app/api/product_api.dart';
+import 'package:auto_parts_app/models/product_model.dart';
+import 'package:auto_parts_app/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:fzc_app/api/product_api.dart';
-import 'package:fzc_app/models/product_model.dart';
-import 'package:fzc_app/utils/constants.dart';
 
 class BarcodeScannerPage extends StatefulWidget {
   const BarcodeScannerPage({super.key});

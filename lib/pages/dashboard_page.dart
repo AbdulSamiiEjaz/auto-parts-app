@@ -1,5 +1,5 @@
+import 'package:auto_parts_app/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:fzc_app/utils/constants.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -25,11 +25,11 @@ class _DashboardState extends State<Dashboard> {
       "icon": Icons.shopping_cart,
       "routeUrl": "/purchaseinvoice",
     },
-    {
-      "title": "Login Page",
-      "icon": Icons.shopping_cart,
-      "routeUrl": "/auth/login",
-    },
+    // {
+    //   "title": "Login Page",
+    //   "icon": Icons.shopping_cart,
+    //   "routeUrl": "/auth/login",
+    // },
   ];
 
   Widget cardTile(String title, IconData icon, String routeUrl) {
@@ -79,7 +79,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("FZC Dashoard"),
+        title: const Text("Dashoard"),
       ),
       body: Container(
           padding: const EdgeInsets.all(10),
